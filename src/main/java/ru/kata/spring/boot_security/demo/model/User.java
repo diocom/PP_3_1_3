@@ -1,7 +1,8 @@
 package ru.kata.spring.boot_security.demo.model;
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 import java.util.*;
-
 
 @Entity
 @Table(name = "users")

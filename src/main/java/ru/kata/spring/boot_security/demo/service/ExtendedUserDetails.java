@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,11 +10,11 @@ import ru.kata.spring.boot_security.demo.model.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class ExtendedUserDetails implements UserDetails {
     private static final long serialVersionUID = 1L;
-    private User user;
+    private final User user;
+
 
     public ExtendedUserDetails(User user) {this.user = user;}
     @Override

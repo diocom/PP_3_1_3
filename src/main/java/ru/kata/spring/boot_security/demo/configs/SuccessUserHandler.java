@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Set;
 
 @Component
+
 public class SuccessUserHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     // Spring Security использует объект Authentication, пользователя авторизованной сессии.
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

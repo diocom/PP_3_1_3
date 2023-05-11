@@ -11,7 +11,6 @@ import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import javax.transaction.Transactional;
 
 @Service
-@Transactional
 public class ExtendedUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
@@ -20,6 +19,7 @@ public class ExtendedUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.getUserByUsername(username);

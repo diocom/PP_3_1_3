@@ -7,6 +7,6 @@ import ru.kata.spring.boot_security.demo.model.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
     @Query("SELECT r FROM Role r WHERE r.name = ?1")
-    public Role findByName(String name);
+    Role findByName(String name);
 
 }

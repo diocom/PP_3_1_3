@@ -46,44 +46,5 @@ public class UserController {
 
         return "user";
     }
-    @GetMapping("/admin/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
 
-        return "/admin/signup_form";
-    }
-
-    @PostMapping("/admin/process_register")
-    public String processRegister(User user) {
-        userService.registerDefaultUser(user);
-        return "redirect:/admin/users";
-    }
-
-    @GetMapping("/admin/users")
-    public String listUsers(Model model) {
-        List<User> listUsers = userService.findAll();
-        model.addAttribute("listUsers", listUsers);
-
-        return "/admin/users";
-    }
-
-    @GetMapping("/admin/edit/{id}")
-    public String editUser(@PathVariable("id") Long id, Model model) {
-        User user = userService.findOne(id);
-        List<Role> listRoles = userService.listRoles();
-        model.addAttribute("user", user);
-        model.addAttribute("listRoles", listRoles);
-        return "/admin/admin";
-    }
-
-    @PostMapping("/admin/save")
-    public String saveUser(User user) {
-        userService.save(user);
-        return "redirect:/admin/users";
-    }
-    @GetMapping("/admin/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        userService.delete(id);
-        return "redirect:/admin/users";
-    }
 }

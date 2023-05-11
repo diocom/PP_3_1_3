@@ -17,7 +17,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -45,8 +45,7 @@ public class UserService {
         return foundUser.orElse(null);
     }
     public User findUser(String userName) {
-        User foundUser = userRepository.getUserByUsername(userName);
-        return foundUser;
+        return userRepository.getUserByUsername(userName);
     }
     public List<Role> listRoles() {
         return roleRepository.findAll();
