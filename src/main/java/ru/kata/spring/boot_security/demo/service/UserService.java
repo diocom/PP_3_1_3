@@ -65,6 +65,7 @@ public class UserService {
     public void delete(Long id) {
         userRepository.deleteById(id);
     }
+
     private void encodePassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);

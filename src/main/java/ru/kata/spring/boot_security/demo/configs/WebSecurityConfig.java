@@ -10,20 +10,23 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import ru.kata.spring.boot_security.demo.service.ExtendedUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
+    private final UserRepository userRepository;
     @Autowired
-    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
+    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserRepository userRepository) {
         this.successUserHandler = successUserHandler;
+        this.userRepository = userRepository;
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new ExtendedUserDetailsService();
+        return new ExtendedUserDetailsService(userRepository);
     }
 
     @Bean
@@ -49,7 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/login").permitAll()
                 .antMatchers("/admin/**").access("hasAuthority('ADMIN')")
                 .antMatchers("/user/**").access("hasAnyAuthority('USER','ADMIN')")
-                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .successHandler(successUserHandler)

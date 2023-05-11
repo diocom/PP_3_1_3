@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,8 +14,10 @@ public class ExtendedUserDetails implements UserDetails {
     private static final long serialVersionUID = 1L;
     private final User user;
 
+    public ExtendedUserDetails(User user) {
+        this.user = user;
+    }
 
-    public ExtendedUserDetails(User user) {this.user = user;}
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<Role> roles = user.getRoles();
@@ -62,4 +63,5 @@ public class ExtendedUserDetails implements UserDetails {
     public String getFullName() {
         return user.getName() + " " + user.getLastName();
     }
+
 }

@@ -8,18 +8,16 @@ import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
-import javax.transaction.Transactional;
 
 @Service
 public class ExtendedUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public ExtendedUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.getUserByUsername(username);
